@@ -1,4 +1,8 @@
 .vs*
 .idea
 
-Stuff/config.json
+[Bb]in
+[Oo]bj
+[Tt]emp
+
+[Cc]onfig.json
