@@ -1,33 +1,37 @@
 using Discord;
 using Discord.WebSocket;
 
-using Legendar_Bot.Stuff;
+using LegendarBot.Stuff;
 
 using Newtonsoft.Json;
 
-using System;
-using System.IO;
-using System.Threading.Tasks;
+namespace LegendarBot {
+  public class Program {
 
-namespace LegendarBot { // тест коммент
-  public class Bot {
+    public static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
-    public static Task Main(string[] args) => new Bot().MainAsync(); // типо вот запускается в асинхроном режиме
+    public static DiscordSocketClient _client;
 
-    private DiscordSocketClient _client;
-
-    private Task Log(LogMessage msg) { // логи
+    private Task Log(LogMessage msg) {
       Console.WriteLine(msg.ToString());
       return Task.CompletedTask;
     }
 
-    public async Task MainAsync() { // подключается к сети в Discord
-      _client = new DiscordSocketClient();
-      _client.Log += Log;
+    public async Task MainAsync() {
+      var discordConfig = new DiscordSocketConfig { MessageCacheSize = 100 };
       var config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("Stuff/config.json"));
+
       var token = config.Token;
       var prefix = config.Prefix;
       var lang = config.Language;
+
+      _client = new DiscordSocketClient(discordConfig);
+      _client.Log += Log;
+
+      _client.Ready += () => {
+        Console.WriteLine("бот заебца");
+        return Task.CompletedTask;
+      };
 
       await _client.LoginAsync(TokenType.Bot, token);
       await _client.StartAsync();
