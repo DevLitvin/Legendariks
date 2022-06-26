@@ -1,7 +1,7 @@
 using Discord;
 using Discord.WebSocket;
 
-using Legendar_Bot.Stuff;
+using LegendarBot.Stuff;
 
 using Newtonsoft.Json;
 
@@ -10,7 +10,7 @@ namespace LegendarBot {
 
     public static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
-    private DiscordSocketClient _client;
+    public static DiscordSocketClient _client;
 
     private Task Log(LogMessage msg) {
       Console.WriteLine(msg.ToString());
