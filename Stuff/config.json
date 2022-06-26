@@ -1,4 +1,5 @@
 {
-  "token": "your-discord-bot-token",
+  "token": "Your-Discord-Bot-Token",
+  "prefix": "leg!",
   "lang": "ru"
 }
